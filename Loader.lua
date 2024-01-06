@@ -18,7 +18,7 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 local Options = Fluent.Options do
-    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto to Upstairs", Default = false });Toggle:OnChanged(function(Value)
+    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Teleport to Upstairs", Default = false });Toggle:OnChanged(function(Value)
     _G.Teleport_to_HighestPoint = Value
         while _G.Teleport_to_HighestPoint do wait(0.1)
             for i,v in pairs(game:GetService("Workspace").tower.finishes:GetChildren()) do
