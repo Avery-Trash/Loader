@@ -49,9 +49,9 @@ _G.Infinity_Jump = value
         end
     end)
 end})
-local Input = Tab:CreateInput({Name = "Walk Speed", RemoveTextAfterFocusLost = false, Callback = function(Text)
+local Input = Tab:CreateInput({Name = "Walk Speed", PlaceholderText = "Walk Speed", RemoveTextAfterFocusLost = false, Callback = function(Text)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Text
 end})
-local Input = Tab:CreateInput({Name = "Jump Power", RemoveTextAfterFocusLost = false, Callback = function(Text)
+local Input = Tab:CreateInput({Name = "Jump Power", PlaceholderText = "Jump Power", RemoveTextAfterFocusLost = false, Callback = function(Text)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = Text
 end})
