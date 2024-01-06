@@ -16,6 +16,33 @@ local mobs = {
 	"Wolf Hunter",
 	"Yetti",
 }
+local Settings = {
+	Autofarm = {
+		Toggle = false,
+		Position = 10,
+		Mob = "",
+	},
+	Autocollect = {
+		Toggle = false,
+		Flowers = false,
+		Item = "Grass",
+	},
+	Players = {
+		Toggle = false,
+		Position = 10,
+	},
+	Notifier = true,
+	Autoquest = {
+		Toggle = false,
+		Position = 10,
+		Quest = "",
+	},
+	Bossfarm = {
+		Toggle = false,
+		Position = 10,
+		Boss = "",
+	},
+}
 local function mobfarm()
 	if not Settings.Autofarm.Toggle then
 		return
