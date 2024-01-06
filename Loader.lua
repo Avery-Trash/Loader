@@ -1,8 +1,8 @@
 function d(dn) ldit = dn % 10 if ldit == 1 and dn ~= 11 then return 'st' elseif ldit == 2 and dn ~= 12 then return 'nd' elseif ldit == 3 and dn ~= 13 then return 'rd' else return 'th' end; end;
 function timef(dtt,dt) dtt = string.gsub(dtt,"%%o",d(dt.day)) return os.date(dtt,os.time(dtdt)) end; u0name = os.date("*t",os.time())
-local Fluent = loadstring(game:HttpGet("https://paste-drop.com/raw/VkKUjKO0Yp"))()
-local SaveManager = loadstring(game:HttpGet("https://paste-drop.com/raw/jG1MWKd31G"))()
-local InterfaceManager = loadstring(game:HttpGet("https://paste-drop.com/raw/bA5XcI4ppz"))()
+local Fluent = loadstring(game:HttpGet("https://pastebin.com/raw/pngpMWrf"))()
+local SaveManager = loadstring(game:HttpGet("https://pastebin.com/raw/gSKcEu81"))()
+local InterfaceManager = loadstring(game:HttpGet("https://pastebin.com/raw/pS2Nvew8"))()
 --  - %A, %B %d%o, %Y.
 local Window = Fluent:CreateWindow({
     Title = timef("Haeze Hub Normal Scripts", u0name),
