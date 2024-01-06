@@ -121,14 +121,14 @@ end
 
 
 local function mobfarm()
-	if not Settings.Autofarm.Toggle then
+	if not Set.Autofarm.Toggle then
 		return
 	end
 	for i, v in next, workspace.Entities.Enemies:GetChildren() do
-		if checker(v, Settings.Autofarm.Mob, "mob") then
+		if checker(v, Set.Autofarm.Mob, "mob") then
 			plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
-				* CFrame.new(0, Settings.Autofarm.Position, 0)
-				* CFrame.Angles(math.rad(angle(Settings.Autofarm.Position)), 0, 0)
+				* CFrame.new(0, Set.Autofarm.Position, 0)
+				* CFrame.Angles(math.rad(angle(Set.Autofarm.Position)), 0, 0)
 			attackremote:FireServer("M1")
 		end
 	end
@@ -139,7 +139,7 @@ local function godmode()
 end
 
 local function autocollect()
-	if not Settings.Autocollect.Toggle then
+	if not Set.Autocollect.Toggle then
 		return
 	end
 	for i, v in next, workspace.Entities.Interactions.Collectibles.OreSpawn:GetDescendants() do
@@ -157,11 +157,11 @@ local function autocollect()
 end
 
 local function flowers()
-	if not Settings.Autocollect.Flowers then
+	if not Set.Autocollect.Flowers then
 		return
 	end
 	for i, v in next, workspace.Entities.Interactions.Collectibles.Flowers:GetDescendants() do
-		if v:FindFirstChildOfClass("ProximityPrompt") and checker(v, Settings.Autocollect.Item, "flower") then
+		if v:FindFirstChildOfClass("ProximityPrompt") and checker(v, Set.Autocollect.Item, "flower") then
 			plr.Character:PivotTo(v:GetPivot())
 			mag = (v.Position - plr.Character.HumanoidRootPart.Position).magnitude
 			if mag < 15 then
@@ -175,21 +175,21 @@ local function flowers()
 end
 
 local function farmplayers()
-	if not Settings.Players.Toggle then
+	if not Set.Players.Toggle then
 		return
 	end
 	for i, v in next, players:GetChildren() do
 		if v ~= plr and v.Character and v.Character.Humanoid.Health > 0 then
 			plr.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
-				* CFrame.new(0, Settings.Players.Position, 0)
-				* CFrame.Angles(math.rad(angle(Settings.Players.Position)), 0, 0)
+				* CFrame.new(0, Set.Players.Position, 0)
+				* CFrame.Angles(math.rad(angle(Set.Players.Position)), 0, 0)
 			attackremote:FireServer("M1")
 		end
 	end
 end
 
 local function bossnotifier()
-	if not Settings.Notifier then
+	if not Set.Notifier then
 		return
 	end
 	for i, v in pairs(workspace.Entities.Enemies:GetChildren()) do
@@ -205,7 +205,7 @@ local function bossnotifier()
 end
 
 local function autoquest()
-	if not Settings.Autoquest.Toggle then
+	if not Set.Autoquest.Toggle then
 		return
 	end
 end
@@ -221,15 +221,15 @@ local function chestfinder(boss)
 end
 
 local function bossfarm()
-	if not Settings.Bossfarm.Toggle then
+	if not Set.Bossfarm.Toggle then
 		return
 	end
 	for i, v in pairs(workspace.Entities.Enemies:GetChildren()) do
-		if checker(v, Settings.Bossfarm.Boss, "boss") then
+		if checker(v, Set.Bossfarm.Boss, "boss") then
 			if v.Humanoid.Health > 0 then
 				plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
-					* CFrame.new(0, Settings.Autofarm.Position, 0)
-					* CFrame.Angles(math.rad(angle(Settings.Autofarm.Position)), 0, 0)
+					* CFrame.new(0, Set.Autofarm.Position, 0)
+					* CFrame.Angles(math.rad(angle(Set.Autofarm.Position)), 0, 0)
 				attackremote:FireServer("M1")
 			else
 				chestfinder(v)
@@ -239,7 +239,7 @@ local function bossfarm()
 end
 
 local function autospin()
-	if not  Settings.Autoquest.Toggle then return end;
+	if not  Set.Autoquest.Toggle then return end;
 end
 local Fluent = loadstring(game:HttpGet("https://pastebin.com/raw/pngpMWrf"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
@@ -259,40 +259,39 @@ local Tabs = {
 	Miscellaneous = Window:AddTab({ Title = "Miscellaneous", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
-
 local Options = Fluent.Options do
     local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Mob Farm toggle", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Autofarm.Toggle = Value
+		Set.Autofarm.Toggle = Value
     end);Options.MyToggle:SetValue(false)
 	local Dropdown = Tabs.General:AddDropdown("Dropdown", {Title = "Mobs",Values = {mobs},Multi = true,Default = 1,});Dropdown:OnChanged(function(Value)
-		Settings.Autofarm.Mob = Value
+		Set.Autofarm.Mob = Value
     end);
 	local Slider = Tabs.General:AddSlider("Slider", {Title = "Position",Description = "",Default = 10,Min = -15,Max = 15,Rounding = 0,Callback = function(Value)
-        Settings.Autofarm.Position = Value
+        Set.Autofarm.Position = Value
     end});Slider:SetValue(10)
 	local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Boss Farm toggle", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Bossfarm.Toggle = Value
+		Set.Bossfarm.Toggle = Value
     end);Options.MyToggle:SetValue(false)
 	local Dropdown = Tabs.General:AddDropdown("Dropdown", {Title = "Mobs",Values = {bossTable},Multi = true,Default = 1,});Dropdown:OnChanged(function(Value)
-		Settings.Bossfarm.Boss = Value
+		Set.Bossfarm.Boss = Value
     end);
 	local Slider = Tabs.General:AddSlider("Slider", {Title = "Position",Description = "",Default = 10,Min = -15,Max = 15,Rounding = 0,Callback = function(Value)
-        Settings.Bossfarm.Position = Value
+        Set.Bossfarm.Position = Value
     end});Slider:SetValue(10)
 	local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Ore Farm toggle", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Autocollect.Toggle = Value
+		Set.Autocollect.Toggle = Value
     end);Options.MyToggle:SetValue(false)
 	local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Flower Farm toggle", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Autocollect.Flowers = Value
+		Set.Autocollect.Flowers = Value
     end);Options.MyToggle:SetValue(false)
 	local Dropdown = Tabs.General:AddDropdown("Dropdown", {Title = "Flowers",Values = {flowersTable},Multi = true,Default = 1,});Dropdown:OnChanged(function(Value)
-		Settings.Autocollect.Item = Value
+		Set.Autocollect.Item = Value
     end);
 	local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Player Farm toggle", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Players.Toggle = Value
+		Set.Players.Toggle = Value
     end);Options.MyToggle:SetValue(false)
 	local Slider = Tabs.General:AddSlider("Slider", {Title = "Position",Description = "",Default = 10,Min = -15,Max = 15,Rounding = 0,Callback = function(Value)
-        Settings.Players.Position = Value
+        Set.Players.Position = Value
     end});Slider:SetValue(10)
 -- ////////////////////////////////////////////////////////// --
 	local Dropdown = Tabs.Miscellaneous:AddDropdown("Dropdown", {Title = "Filler Npcs TP",Values = {FillerNpcs},Multi = false,Default = 1,});Dropdown:OnChanged(function(Value)
@@ -310,8 +309,8 @@ local Options = Fluent.Options do
 	Tabs.Miscellaneous:AddButton({Title = "Godmode",Description = "",Callback = function()
 		godmode()
     end})
-	local Toggle = Tabs.General:AddToggle("MyToggle", {Title = "Boss notifier", Default = false });Toggle:OnChanged(function(Value)
-		Settings.Notifier = Value
+	local Toggle = Tabs.Miscellaneous:AddToggle("MyToggle", {Title = "Boss notifier", Default = false });Toggle:OnChanged(function(Value)
+		Set.Notifier = Value
     end);Options.MyToggle:SetValue(false)
 end
 
