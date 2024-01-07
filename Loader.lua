@@ -24,9 +24,7 @@ local bossTable = {
 	"Riddlebones",
 	"Wolf Hunter Craftsman",
 }
-
 local questTable = {}
-
 local flowersTable = {
 	"Fire Lily",
 	"Grass",
@@ -34,7 +32,6 @@ local flowersTable = {
 	"Mana Flower",
 	"Frozen Lily",
 }
-
 local Settings = {
 	Autofarm = {
 		Toggle = false,
@@ -62,7 +59,6 @@ local Settings = {
 		Boss = "",
 	},
 }
-
 local function angle(number)
 	if number >= 0 then
 		return -90
@@ -74,7 +70,6 @@ local FillerNpcs = {}
 local Quests = {}
 local interactions = {}
 local events = {}
-
 task.spawn(function()
 	if game.PlaceId == 14839995292 then
 		for i, v in next, workspace.Entities.Interactions.FillerNpcs:GetChildren() do
@@ -96,7 +91,6 @@ task.spawn(function()
 		return
 	end
 end)
-
 local function checker(object, location, type)
 	if type == "mob" then
 		if location[object.Name] == true and object.Humanoid.Health > 0 then
@@ -118,8 +112,6 @@ local function checker(object, location, type)
 		end
 	end
 end
-
-
 local function mobfarm()
 	if not Settings.Autofarm.Toggle then
 		return
@@ -133,11 +125,9 @@ local function mobfarm()
 		end
 	end
 end
-
 local function godmode()
 	ReplicatedStorage.ReplicatedPackage.Remotes.Distance:FireServer(0 / 0, 0 / 0, "High")
 end
-
 local function autocollect()
 	if not Settings.Autocollect.Toggle then
 		return
@@ -155,7 +145,6 @@ local function autocollect()
 		end
 	end
 end
-
 local function flowers()
 	if not Settings.Autocollect.Flowers then
 		return
@@ -173,7 +162,6 @@ local function flowers()
 		end
 	end
 end
-
 local function farmplayers()
 	if not Settings.Players.Toggle then
 		return
@@ -187,7 +175,6 @@ local function farmplayers()
 		end
 	end
 end
-
 local function bossnotifier()
 	if not Settings.Notifier then
 		return
@@ -195,21 +182,19 @@ local function bossnotifier()
 	for i, v in pairs(workspace.Entities.Enemies:GetChildren()) do
 		if bossTable[v.Name] then
 			game.StarterGui:SetCore("SendNotification", {
-				Title = string.format("Boss Spawned: %s", v.Name), -- the title (ofc)
-				Text = "", -- what the text says (ofc)
-				Icon = "", -- the image if u want.
-				Duration = 25, -- how long the notification should in secounds
+				Title = string.format("Boss Spawned: %s", v.Name),
+				Text = "",
+				Icon = "",
+				Duration = 25,
 			})
 		end
 	end
 end
-
 local function autoquest()
 	if not Settings.Autoquest.Toggle then
 		return
 	end
 end
-
 local function chestfinder(boss)
 	for i,v in pairs(workspace.Entities.Events[boss.Name].Chests:GetDescendants()) do
 		if v:IsA("Model") and v.Name == "Chest"  and v:FindFirstChildOfClass("ProximityPrompt") then
@@ -219,7 +204,6 @@ local function chestfinder(boss)
 		end
 	end
 end
-
 local function bossfarm()
 	if not Settings.Bossfarm.Toggle then
 		return
@@ -237,16 +221,9 @@ local function bossfarm()
 		end
 	end
 end
-
 local function autospin()
-	if not  Settings.Autoquest.Toggle then return end;
-	
-
-
+	if not Settings.Autoquest.Toggle then return end;
 end
-
-
-
 local repo = "https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/"
 local Library = (loadstring(game:HttpGet(repo .. "Library.lua")))()
 local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/SoftworkLHC/Linoria-Library/main/LinoriaLib-main/addons/ThemeManager.lua")))()
@@ -259,202 +236,67 @@ local Window = Library:CreateWindow({
 	MenuFadeTime = 0,
 })
 local Tabs = {
-	Main = Window:AddTab("Main"),
+	Main = Window:AddTab("General"),
 	["Configuration"] = Window:AddTab("Configuration"),
 }
+local TabBox = Tabs.Main:AddLeftTabbox();
+local General = TabBox:AddTab('\\\\ General //');
+General:AddToggle("MyToggle", {Text = "Auto Farm Level",Default = false,Callback = function(Value)
+	Settings.Autofarm.Toggle = Value
+end})
+General:AddDropdown("MyDropdown", {Values = mobs,Default = 1,Multi = true,Text = "Mob's Selected",Callback = function(Value)
+	Settings.Autofarm.Mob = Value
+end})
+General:AddSlider("MySlider", {Text = "- Position Farm I",Default = 10 Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
+	Settings.Autofarm.Position = Value
+end})
+General:AddToggle("MyToggle", {Text = "Auto Farm Bosse's",Default = false,Callback = function(Value)
+	Settings.Bossfarm.Toggle = Value
+end})
+General:AddDropdown("MyDropdown", {Values = bossTable,Default = 1,Multi = true,Text = "Bosse's Selected",Callback = function(Value)
+	Settings.Bossfarm.Boss = Value
+end})
+General:AddSlider("MySlider", {Text = "- Position Farm II",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
+	Settings.Bossfarm.Position = Value
+end})
+General:AddToggle("MyToggle", {Text = "Auto Farm Ore's",Default = false,Callback = function(Value)
+	Settings.Autocollect.Toggle = Value
+end})
+General:AddDivider()
+General:AddToggle("MyToggle", {Text = "Auto Farm Flower",Default = false,Callback = function(Value)
+	Settings.Autocollect.Flowers = Value
+end})
+General:AddDropdown("MyDropdown", {Values = flowersTable,Default = 1,Multi = true,Text = "Flower's Selected",Callback = function(Value)
+	Settings.Autocollect.Item = Value
+end})
+General:AddToggle("MyToggle", {Text = "Auto Farm Player",Default = false,Callback = function(Value)
+	Settings.Players.Toggle = Value
+end})
+General:AddSlider("MySlider", {Text = "- Position Farm III",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
+	Settings.Players.Position = Value
+end})
 
-local LeftGroupBox = Tabs.Main:AddLeftGroupbox("Farms")
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Mob Farm toggle",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Autofarm.Toggle = Value
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = mobs,
-	Default = 1, -- number index of the value / string
-	Multi = true, -- true / false, allows multiple choices to be selected
-
-	Text = "Mobs",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		Settings.Autofarm.Mob = Value
-	end,
-})
-
-LeftGroupBox:AddSlider("MySlider", {
-	Text = "Position",
-	Default = 10,
-	Min = -15,
-	Max = 15,
-	Rounding = 0,
-	Compact = false,
-	Callback = function(Value)
-		Settings.Autofarm.Position = Value
-	end,
-})
-
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Boss Farm toggle",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Bossfarm.Toggle = Value
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = bossTable,
-	Default = 1, -- number index of the value / string
-	Multi = true, -- true / false, allows multiple choices to be selected
-
-	Text = "Bosses",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		Settings.Bossfarm.Boss = Value
-	end,
-})
-
-LeftGroupBox:AddSlider("MySlider", {
-	Text = "Position",
-	Default = 10,
-	Min = -15,
-	Max = 15,
-	Rounding = 0,
-	Compact = false,
-	Callback = function(Value)
-		Settings.Bossfarm.Position = Value
-	end,
-})
-
-
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Ore Farm toggle",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Autocollect.Toggle = Value
-	end,
-})
-
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Flower Farm toggle",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Autocollect.Flowers = Value
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = flowersTable,
-	Default = 1, -- number index of the value / string
-	Multi = true, -- true / false, allows multiple choices to be selected
-
-	Text = "Flowers",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-	Callback = function(Value)
-		Settings.Autocollect.Item = Value
-	end,
-})
-
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Player Farm toggle",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Players.Toggle = Value
-	end,
-})
-
-LeftGroupBox:AddSlider("MySlider", {
-	Text = "Position",
-	Default = 10,
-	Min = -15,
-	Max = 15,
-	Rounding = 0,
-	Compact = false,
-	Callback = function(Value)
-		Settings.Players.Position = Value
-	end,
-})
-
-local LeftGroupBox = Tabs.Main:AddRightGroupbox("Misc")
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = FillerNpcs,
-	Default = 1, -- number index of the value / string
-	Multi = false, -- true / false, allows multiple choices to be selected
-
-	Text = "Filler Npcs TP",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		plr.Character:PivotTo(workspace.Entities.Interactions.FillerNpcs[Value]:GetPivot())
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = Quests,
-	Default = 1, -- number index of the value / string
-	Multi = false, -- true / false, allows multiple choices to be selected
-
-	Text = "Quests TP",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		plr.Character:PivotTo(workspace.Entities.Interactions.Quests[Value]:GetPivot())
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = interactions,
-	Default = 1, -- number index of the value / string
-	Multi = false, -- true / false, allows multiple choices to be selected
-
-	Text = "Special interractions TP",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		plr.Character:PivotTo(workspace.Entities.Interactions["Special Interactions"][Value]:GetPivot())
-	end,
-})
-
-LeftGroupBox:AddDropdown("MyDropdown", {
-	Values = events,
-	Default = 1, -- number index of the value / string
-	Multi = false, -- true / false, allows multiple choices to be selected
-
-	Text = "Special Events TP",
-	Tooltip = "", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		lr.Character:PivotTo(workspace.Entities.Interactions.SpecialEvents[Value]:GetPivot())
-	end,
-})
-
-local MyButton = LeftGroupBox:AddButton({
-	Text = "Godmode",
-	Func = function()
-		godmode()
-	end,
-	DoubleClick = false,
-	Tooltip = "",
-})
-
-LeftGroupBox:AddToggle("Autofarm", {
-	Text = "Boss notifier",
-	Default = false,
-	Tooltip = "",
-	Callback = function(Value)
-		Settings.Notifier = Value
-	end,
-})
+local TabBox = Tabs.Main:AddRightTabbox();
+local Misc = TabBox:AddTab('\\\\ Miscellaneous //');
+Misc:AddDropdown("MyDropdown", {Values = FillerNpcs,Default = 1,Multi = false,Text = "Filler Npc's Teleport",Callback = function(Value)
+	plr.Character:PivotTo(workspace.Entities.Interactions.FillerNpcs[Value]:GetPivot())
+end})
+Misc:AddDropdown("MyDropdown", {Values = Quests,Default = 1,Multi = false,Text = "Quest's Teleport",Callback = function(Value)
+	plr.Character:PivotTo(workspace.Entities.Interactions.Quests[Value]:GetPivot())
+end})
+Misc:AddDropdown("MyDropdown", {Values = interactions,Default = 1,Multi = false,Text = "Special interraction's Teleport",Callback = function(Value)
+	plr.Character:PivotTo(workspace.Entities.Interactions["Special Interactions"][Value]:GetPivot())
+end})
+Misc:AddDropdown("MyDropdown", {Values = events,Default = 1,Multi = false,Text = "Special Event's Teleport",Callback = function(Value)
+	lr.Character:PivotTo(workspace.Entities.Interactions.SpecialEvents[Value]:GetPivot())
+end})
+Misc:AddDivider()
+local MyButton = Misc:AddButton({Text = "Immortal Mode",Func = function()
+	godmode()
+end})
+Misc:AddToggle("MyToggle", {Text = "- Bosse's Spawned Notifier",Default = false,Callback = function(Value)
+	Settings.Notifier = Value
+end})
 
 local MenuGroup = Tabs["Configuration"]:AddLeftGroupbox("Menu");
 (MenuGroup:AddLabel("Menu bind")):AddKeyPicker("MenuKeybind", {Default = "End",NoUI = true,Text = "Menu keybind"})
