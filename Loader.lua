@@ -3863,7 +3863,7 @@ General:AddDropdown("MyDropdown", {
 	end,
 })
 General:AddSlider("MySlider", {
-	Text = "- Position Farm I",
+	Text = "┗ Position Farm I",
 	Default = 10,
 	Min = -15,
 	Max = 15,
@@ -3893,7 +3893,7 @@ General:AddDropdown("MyDropdown", {
 	end,
 })
 General:AddSlider("MySlider", {
-	Text = "- Position Farm II",
+	Text = "┗ Position Farm II",
 	Default = 10,
 	Min = -15,
 	Max = 15,
@@ -3912,7 +3912,7 @@ General:AddToggle("Autofarm", {
 		Settings.Autocollect.Toggle = Value
 	end,
 })
-General:AddLabel("┗ Special")
+General:AddLabel("┗ Additional Option's")
 General:AddToggle("Autofarm", {
 	Text = "Auto Farm Flower's",
 	Default = false,
@@ -3941,7 +3941,7 @@ General:AddToggle("Autofarm", {
 	end,
 })
 General:AddSlider("MySlider", {
-	Text = "- Position Farm III",
+	Text = "┗ Position Farm III",
 	Default = 10,
 	Min = -15,
 	Max = 15,
