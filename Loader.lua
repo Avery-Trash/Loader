@@ -241,7 +241,7 @@ local Tabs = {
 }
 local TabBox = Tabs.Main:AddLeftTabbox();
 local General = TabBox:AddTab('\\\\ General //');
-General:AddToggle("MyToggle", {Text = "Auto Farm Level",Default = false,Callback = function(Value)
+General:AddToggle("Autofarm", {Text = "Auto Farm Level",Default = false,Callback = function(Value)
 	Settings.Autofarm.Toggle = Value
 end})
 General:AddDropdown("MyDropdown", {Values = mobs,Default = 1,Multi = true,Text = "Mob's Selected",Callback = function(Value)
@@ -250,7 +250,7 @@ end})
 General:AddSlider("MySlider", {Text = "- Position Farm I",Default = 10 Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
 	Settings.Autofarm.Position = Value
 end})
-General:AddToggle("MyToggle", {Text = "Auto Farm Bosse's",Default = false,Callback = function(Value)
+General:AddToggle("Autofarm", {Text = "Auto Farm Bosse's",Default = false,Callback = function(Value)
 	Settings.Bossfarm.Toggle = Value
 end})
 General:AddDropdown("MyDropdown", {Values = bossTable,Default = 1,Multi = true,Text = "Bosse's Selected",Callback = function(Value)
@@ -259,17 +259,17 @@ end})
 General:AddSlider("MySlider", {Text = "- Position Farm II",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
 	Settings.Bossfarm.Position = Value
 end})
-General:AddToggle("MyToggle", {Text = "Auto Farm Ore's",Default = false,Callback = function(Value)
+General:AddToggle("Autofarm", {Text = "Auto Farm Ore's",Default = false,Callback = function(Value)
 	Settings.Autocollect.Toggle = Value
 end})
 General:AddDivider()
-General:AddToggle("MyToggle", {Text = "Auto Farm Flower",Default = false,Callback = function(Value)
+General:AddToggle("Autofarm", {Text = "Auto Farm Flower",Default = false,Callback = function(Value)
 	Settings.Autocollect.Flowers = Value
 end})
 General:AddDropdown("MyDropdown", {Values = flowersTable,Default = 1,Multi = true,Text = "Flower's Selected",Callback = function(Value)
 	Settings.Autocollect.Item = Value
 end})
-General:AddToggle("MyToggle", {Text = "Auto Farm Player",Default = false,Callback = function(Value)
+General:AddToggle("Autofarm", {Text = "Auto Farm Player",Default = false,Callback = function(Value)
 	Settings.Players.Toggle = Value
 end})
 General:AddSlider("MySlider", {Text = "- Position Farm III",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
@@ -294,7 +294,7 @@ Misc:AddDivider()
 local MyButton = Misc:AddButton({Text = "Immortal Mode",Func = function()
 	godmode()
 end})
-Misc:AddToggle("MyToggle", {Text = "- Bosse's Spawned Notifier",Default = false,Callback = function(Value)
+Misc:AddToggle("Autofarm", {Text = "- Bosse's Spawned Notifier",Default = false,Callback = function(Value)
 	Settings.Notifier = Value
 end})
 
