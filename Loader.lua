@@ -227,7 +227,7 @@ end
 function d(dn) ldit = dn % 10 if ldit == 1 and dn ~= 11 then return 'st' elseif ldit == 2 and dn ~= 12 then return 'nd' elseif ldit == 3 and dn ~= 13 then return 'rd' else return 'th' end; end;
 function timef(dtt,dt) dtt = string.gsub(dtt,"%%o",d(dt.day)) return os.date(dtt,os.time(dtdt)) end; u0name = os.date("*t",os.time())
 local Library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/Library.lua")))()
-local ThemeManager = (loadstring(game:HttpGet("https://pastebin.com/raw/R8MDuC3q")))()
+local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/addons/ThemeManager.lua")))()
 local SaveManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/addons/SaveManager.lua")))()
 local Window = Library:CreateWindow({Title = timef("Haeze Hub Normal Scripts - %A, %B %d%o, %Y.", u0name),Center = true,AutoShow = true,TabPadding = 8,MenuFadeTime = 0})
 local Tabs = {Main = Window:AddTab("Main"),["UI Settings"] = Window:AddTab("UI Settings"),}
@@ -288,8 +288,6 @@ end})
 Misc:AddToggle("MyToggle", {Text = "Bosse's Spawned Notifier",Default = false,Callback = function(Value)
 	Settings.Notifier = Value
 end})
-
-local TeleService = game:GetService("TeleportService");local Players = game:GetService("Players");
 local MenuGroup = Tabs["UI Settings"]:AddLeftGroupbox("Menu");
 (MenuGroup:AddLabel("Menu bind")):AddKeyPicker("MenuKeybind", {Default = "End",NoUI = true,Text = "Menu keybind",})
 MenuGroup:AddButton("Unload", function() Library:Unload() end)
@@ -302,10 +300,6 @@ ThemeManager:SetFolder("Haeze(Hub) - Clover Retribution [Scripts]")
 SaveManager:SetFolder("Haeze(Hub) - Clover Retribution [Scripts]")
 ThemeManager:ApplyToTab(Tabs["UI Settings"])
 SaveManager:LoadAutoloadConfig()
-local MenuGroup = Tabs['Configuration']:AddRightGroupbox('          \\\\ Servers Job //');
-MenuGroup:AddInput('MyTextbox', {Default = '',Numeric = false,Finished = false,Text = 'Join ID:',Placeholder = '',Callback = function(Value) _G.Join_ID = Value;end});
-MenuGroup:AddButton("Invite",function() TeleService:TeleportToPlaceInstance(game.PlaceId,_G.Join_ID,Players.LocalPlayer);end);
-MenuGroup:AddButton("Copy Join ID",function() setclipboard(game.JobId);end);getgenv().Library = Library;
 game:GetService("RunService").Heartbeat:connect(function()
 	task.spawn(function()
 		autocollect()
