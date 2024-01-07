@@ -227,10 +227,10 @@ end
 function d(dn) ldit = dn % 10 if ldit == 1 and dn ~= 11 then return 'st' elseif ldit == 2 and dn ~= 12 then return 'nd' elseif ldit == 3 and dn ~= 13 then return 'rd' else return 'th' end; end;
 function timef(dtt,dt) dtt = string.gsub(dtt,"%%o",d(dt.day)) return os.date(dtt,os.time(dtdt)) end; u0name = os.date("*t",os.time())
 local Library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/Library.lua")))()
-local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/addons/ThemeManager.lua")))()
+local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/JAKSGJFDJKASSSDJKFGHIOI/LLL/main/ThemeManager.lua")))()
 local SaveManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/addons/SaveManager.lua")))()
 local Window = Library:CreateWindow({Title = timef("Haeze Hub Normal Scripts - %A, %B %d%o, %Y.", u0name),Center = true,AutoShow = true,TabPadding = 8,MenuFadeTime = 0})
-local Tabs = {Main = Window:AddTab("Main"),["UI Settings"] = Window:AddTab("UI Settings"),}
+local Tabs = {Main = Window:AddTab("General"),["Configuration"] = Window:AddTab("Configuration"),}
 local TabBox = Tabs.Main:AddLeftTabbox();
 local General = TabBox:AddTab('\\\\ General //');
 General:AddToggle("MyToggle", {Text = "Auto Farm Level",Default = false,Callback = function(Value)
@@ -239,7 +239,7 @@ end})
 General:AddDropdown("MyDropdown", {Values = mobs,Default = 1,Multi = true,Text = "Mob's Selected",Callback = function(Value)
 	Settings.Autofarm.Mob = Value
 end})
-General:AddSlider("MySlider", {Text = "- Position Farm I",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
+General:AddSlider("MySlider", {Text = "- Position Farm I",Default = 10 Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
 	Settings.Autofarm.Position = Value
 end})
 General:AddToggle("MyToggle", {Text = "Auto Farm Bosse's",Default = false,Callback = function(Value)
@@ -282,23 +282,25 @@ end})
 Misc:AddDropdown("MyDropdown", {Values = events,Default = 1,Multi = false,Text = "Special Event's Teleport",Callback = function(Value)
 	lr.Character:PivotTo(workspace.Entities.Interactions.SpecialEvents[Value]:GetPivot())
 end})
-local MyButton = Misc:AddButton({Text = "Godmode",Func = function()
+Misc:AddDivider()
+local MyButton = Misc:AddButton({Text = "Immortal Mode",Func = function()
 	godmode()
 end})
-Misc:AddToggle("MyToggle", {Text = "Bosse's Spawned Notifier",Default = false,Callback = function(Value)
+Misc:AddToggle("MyToggle", {Text = "- Bosse's Spawned Notifier",Default = false,Callback = function(Value)
 	Settings.Notifier = Value
 end})
-local MenuGroup = Tabs["UI Settings"]:AddLeftGroupbox("Menu");
+
+local MenuGroup = Tabs["Configuration"]:AddLeftGroupbox("Menu");
 (MenuGroup:AddLabel("Menu bind")):AddKeyPicker("MenuKeybind", {Default = "End",NoUI = true,Text = "Menu keybind",})
 MenuGroup:AddButton("Unload", function() Library:Unload() end)
 Library.ToggleKeybind = Options.MenuKeybind
 ThemeManager:SetLibrary(Library)
 SaveManager:SetLibrary(Library)
 SaveManager:IgnoreThemeSettings()
-SaveManager:BuildConfigSection(Tabs["UI Settings"])
+SaveManager:BuildConfigSection(Tabs["Configuration"])
 ThemeManager:SetFolder("Haeze(Hub) - Clover Retribution [Scripts]")
 SaveManager:SetFolder("Haeze(Hub) - Clover Retribution [Scripts]")
-ThemeManager:ApplyToTab(Tabs["UI Settings"])
+ThemeManager:ApplyToTab(Tabs["Configuration"])
 SaveManager:LoadAutoloadConfig()
 game:GetService("RunService").Heartbeat:connect(function()
 	task.spawn(function()
