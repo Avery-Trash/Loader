@@ -224,91 +224,207 @@ end
 local function autospin()
 	if not Settings.Autoquest.Toggle then return end;
 end
+function d(dn)
+    ldit = dn % 10
+    if ldit == 1 and dn ~= 11
+        then return 'st'
+    elseif ldit == 2 and dn ~= 12
+        then return 'nd'
+    elseif ldit == 3 and dn ~= 13
+        then return 'rd'
+    else
+        return 'th'
+    end
+end
+function timef(dtt,dt)
+    dtt = string.gsub(dtt,"%%o",d(dt.day))
+    return os.date(dtt,os.time(dtdt))
+end
+u0name = os.date("*t",os.time())
 local repo = "https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/"
 local Library = (loadstring(game:HttpGet(repo .. "Library.lua")))()
 local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/SoftworkLHC/Linoria-Library/main/LinoriaLib-main/addons/ThemeManager.lua")))()
 local SaveManager = (loadstring(game:HttpGet(repo .. "addons/SaveManager.lua")))()
-local Window = Library:CreateWindow({
-	Title = "Clover Retribution Paid",
-	Center = true,
-	AutoShow = true,
-	TabPadding = 8,
-	MenuFadeTime = 0,
-})
-local Tabs = {
-	Main = Window:AddTab("General"),
-	["Configuration"] = Window:AddTab("Configuration"),
-}
+local Window = Library:CreateWindow({Title = timef("Haeze Hub Classic Scripts - %A, %B %d%o, %Y.", u0name),Center = true,AutoShow = true,TabPadding = 8,MenuFadeTime = 0,})
+local Tabs = {Main = Window:AddTab("General"),["Configuration"] = Window:AddTab("Configuration"),}
+
 local TabBox = Tabs.Main:AddLeftTabbox();
 local General = TabBox:AddTab('\\\\ General //');
-General:AddToggle("Autofarm", {Text = "Auto Farm Level",Default = false,Callback = function(Value)
-	Settings.Autofarm.Toggle = Value
-end})
-General:AddDropdown("MyDropdown", {Values = mobs,Default = 1,Multi = true,Text = "Mob's Selected",Callback = function(Value)
-	Settings.Autofarm.Mob = Value
-end})
-General:AddSlider("MySlider", {Text = "- Position Farm I",Default = 10 Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
-	Settings.Autofarm.Position = Value
-end})
-General:AddToggle("Autofarm", {Text = "Auto Farm Bosse's",Default = false,Callback = function(Value)
-	Settings.Bossfarm.Toggle = Value
-end})
-General:AddDropdown("MyDropdown", {Values = bossTable,Default = 1,Multi = true,Text = "Bosse's Selected",Callback = function(Value)
-	Settings.Bossfarm.Boss = Value
-end})
-General:AddSlider("MySlider", {Text = "- Position Farm II",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
-	Settings.Bossfarm.Position = Value
-end})
-General:AddToggle("Autofarm", {Text = "Auto Farm Ore's",Default = false,Callback = function(Value)
-	Settings.Autocollect.Toggle = Value
-end})
-General:AddDivider()
-General:AddToggle("Autofarm", {Text = "Auto Farm Flower",Default = false,Callback = function(Value)
-	Settings.Autocollect.Flowers = Value
-end})
-General:AddDropdown("MyDropdown", {Values = flowersTable,Default = 1,Multi = true,Text = "Flower's Selected",Callback = function(Value)
-	Settings.Autocollect.Item = Value
-end})
-General:AddToggle("Autofarm", {Text = "Auto Farm Player",Default = false,Callback = function(Value)
-	Settings.Players.Toggle = Value
-end})
-General:AddSlider("MySlider", {Text = "- Position Farm III",Default = 10,Min = -15,Max = 15,Rounding = 0,Compact = false,Callback = function(Value)
-	Settings.Players.Position = Value
-end})
+General:AddToggle("Autofarm", {
+	Text = "Auto Farm Mob's",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Autofarm.Toggle = Value
+	end,
+})
+General:AddDropdown("MyDropdown", {
+	Values = mobs,
+	Default = 1,
+	Multi = true,
+	Text = "Mob's Selected",
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Autofarm.Mob = Value
+	end,
+})
+General:AddSlider("MySlider", {
+	Text = "- Position Farm I",
+	Default = 10,
+	Min = -15,
+	Max = 15,
+	Rounding = 0,
+	Compact = false,
+	Callback = function(Value)
+		Settings.Autofarm.Position = Value
+	end,
+})
+General:AddToggle("Autofarm", {
+	Text = "Auto Farm Bosse's",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Bossfarm.Toggle = Value
+	end,
+})
+General:AddDropdown("MyDropdown", {
+	Values = bossTable,
+	Default = 1,
+	Multi = true,
+	Text = "Bosse's Selected",
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Bossfarm.Boss = Value
+	end,
+})
+General:AddSlider("MySlider", {
+	Text = "- Position Farm II",
+	Default = 10,
+	Min = -15,
+	Max = 15,
+	Rounding = 0,
+	Compact = false,
+	Callback = function(Value)
+		Settings.Bossfarm.Position = Value
+	end,
+})
+General:AddToggle("Autofarm", {
+	Text = "Auto Farm Ore's",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Autocollect.Toggle = Value
+	end,
+})
+General:AddToggle("Autofarm", {
+	Text = "Auto Farm Flower's",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Autocollect.Flowers = Value
+	end,
+})
+General:AddDropdown("MyDropdown", {
+	Values = flowersTable,
+	Default = 1,
+	Multi = true,
+	Text = "Flower's Selected",
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Autocollect.Item = Value
+	end,
+})
+General:AddToggle("Autofarm", {
+	Text = "Auto Farm Player's",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Players.Toggle = Value
+	end,
+})
+General:AddSlider("MySlider", {
+	Text = "- Position Farm III",
+	Default = 10,
+	Min = -15,
+	Max = 15,
+	Rounding = 0,
+	Compact = false,
+	Callback = function(Value)
+		Settings.Players.Position = Value
+	end,
+})
 
-local TabBox = Tabs.Main:AddRightTabbox();
-local Misc = TabBox:AddTab('\\\\ Miscellaneous //');
-Misc:AddDropdown("MyDropdown", {Values = FillerNpcs,Default = 1,Multi = false,Text = "Filler Npc's Teleport",Callback = function(Value)
-	plr.Character:PivotTo(workspace.Entities.Interactions.FillerNpcs[Value]:GetPivot())
-end})
-Misc:AddDropdown("MyDropdown", {Values = Quests,Default = 1,Multi = false,Text = "Quest's Teleport",Callback = function(Value)
-	plr.Character:PivotTo(workspace.Entities.Interactions.Quests[Value]:GetPivot())
-end})
-Misc:AddDropdown("MyDropdown", {Values = interactions,Default = 1,Multi = false,Text = "Special interraction's Teleport",Callback = function(Value)
-	plr.Character:PivotTo(workspace.Entities.Interactions["Special Interactions"][Value]:GetPivot())
-end})
-Misc:AddDropdown("MyDropdown", {Values = events,Default = 1,Multi = false,Text = "Special Event's Teleport",Callback = function(Value)
-	lr.Character:PivotTo(workspace.Entities.Interactions.SpecialEvents[Value]:GetPivot())
-end})
-Misc:AddDivider()
-local MyButton = Misc:AddButton({Text = "Immortal Mode",Func = function()
-	godmode()
-end})
-Misc:AddToggle("Autofarm", {Text = "- Bosse's Spawned Notifier",Default = false,Callback = function(Value)
-	Settings.Notifier = Value
-end})
+local TabBox = Tabs.Main:AddLeftTabbox();
+local Miscellaneous = TabBox:AddTab('\\\\ Miscellaneous //');
+Miscellaneous:AddDropdown("MyDropdown", {
+	Values = FillerNpcs,
+	Default = 1,
+	Multi = false,
+	Text = "Filler Npc's Teleport",
+	Tooltip = "",
+	Callback = function(Value)
+		plr.Character:PivotTo(workspace.Entities.Interactions.FillerNpcs[Value]:GetPivot())
+	end,
+})
+Miscellaneous:AddDropdown("MyDropdown", {
+	Values = Quests,
+	Default = 1,
+	Multi = false,
+	Text = "Quest's Teleport",
+	Tooltip = "",
+	Callback = function(Value)
+		plr.Character:PivotTo(workspace.Entities.Interactions.Quests[Value]:GetPivot())
+	end,
+})
+Miscellaneous:AddDropdown("MyDropdown", {
+	Values = interactions,
+	Default = 1,
+	Multi = false,
+	Text = "Special interraction's Teleport",
+	Tooltip = "",
+	Callback = function(Value)
+		plr.Character:PivotTo(workspace.Entities.Interactions["Special Interactions"][Value]:GetPivot())
+	end,
+})
+Miscellaneous:AddDropdown("MyDropdown", {
+	Values = events,
+	Default = 1,
+	Multi = false,
+	Text = "Special Event's Teleport",
+	Tooltip = "",
+	Callback = function(Value)
+		lr.Character:PivotTo(workspace.Entities.Interactions.SpecialEvents[Value]:GetPivot())
+	end,
+})
+local MyButton = Miscellaneous:AddButton({
+	Text = "Immortal Mode [Risk]",
+	Func = function()
+		godmode()
+	end,
+	DoubleClick = false,
+	Tooltip = "",
+})
+Miscellaneous:AddToggle("Autofarm", {
+	Text = "Bosse's Spawned Notifier",
+	Default = false,
+	Tooltip = "",
+	Callback = function(Value)
+		Settings.Notifier = Value
+	end,
+})
 
-local MenuGroup = Tabs["Configuration"]:AddLeftGroupbox("Menu");
-(MenuGroup:AddLabel("Menu bind")):AddKeyPicker("MenuKeybind", {Default = "End",NoUI = true,Text = "Menu keybind"})
-MenuGroup:AddButton("Unload", function() Library:Unload() end)
+local MenuGroup = Tabs['Configuration']:AddLeftGroupbox('Menu')
+MenuGroup:AddButton('Unload', function() Library:Unload() end)
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
 Library.ToggleKeybind = Options.MenuKeybind
 ThemeManager:SetLibrary(Library)
 SaveManager:SetLibrary(Library)
 SaveManager:IgnoreThemeSettings()
-SaveManager:BuildConfigSection(Tabs["Configuration"])
-ThemeManager:SetFolder("Haeze(Hub)/CR")
-SaveManager:SetFolder("Haeze(Hub)/CR")
-ThemeManager:ApplyToTab(Tabs["Configuration"])
+SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
+ThemeManager:SetFolder('MyScriptHub')
+SaveManager:SetFolder('MyScriptHub/specific-game')
+SaveManager:BuildConfigSection(Tabs['Configuration'])
+ThemeManager:ApplyToTab(Tabs['Configuration'])
 SaveManager:LoadAutoloadConfig()
 game:GetService("RunService").Heartbeat:connect(function()
 	task.spawn(function()
