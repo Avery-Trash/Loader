@@ -226,9 +226,9 @@ local function autospin()
 end
 function d(dn) ldit = dn % 10 if ldit == 1 and dn ~= 11 then return 'st' elseif ldit == 2 and dn ~= 12 then return 'nd' elseif ldit == 3 and dn ~= 13 then return 'rd' else return 'th' end; end;
 function timef(dtt,dt) dtt = string.gsub(dtt,"%%o",d(dt.day)) return os.date(dtt,os.time(dtdt)) end; u0name = os.date("*t",os.time())
-local Library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/Library.lua")))()
+local Library = (loadstring(game:HttpGet("https://raw.githubusercontent.com/JAKSGJFDJKASSSDJKFGHIOI/LLL/main/Library.lua")))()
 local ThemeManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/JAKSGJFDJKASSSDJKFGHIOI/LLL/main/ThemeManager.lua")))()
-local SaveManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/HTDBarsi/LinoriaLib/main/addons/SaveManager.lua")))()
+local SaveManager = (loadstring(game:HttpGet("https://raw.githubusercontent.com/JAKSGJFDJKASSSDJKFGHIOI/LLL/main/SaveManager.lua")))()
 local Window = Library:CreateWindow({Title = timef("Haeze Hub Normal Scripts - %A, %B %d%o, %Y.", u0name),Center = true,AutoShow = true,TabPadding = 8,MenuFadeTime = 0})
 local Tabs = {Main = Window:AddTab("General"),["Configuration"] = Window:AddTab("Configuration"),}
 local TabBox = Tabs.Main:AddLeftTabbox();
